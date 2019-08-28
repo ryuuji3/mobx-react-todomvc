@@ -1,10 +1,15 @@
-import {observable, computed, reaction, action} from 'mobx';
+import { observable, computed, reaction, action } from 'mobx';
 import TodoModel from '../models/TodoModel'
 import * as Utils from '../utils';
 
 
 export default class TodoStore {
+	rootStore;
 	@observable todos = [];
+
+	constructor(rootStore) {
+		this.rootStore = rootStore;
+	}
 
 	@computed get activeTodoCount() {
 		return this.todos.reduce(
@@ -29,19 +34,19 @@ export default class TodoStore {
 	}
 
 	@action
-	addTodo (title) {
+	addTodo(title) {
 		this.todos.push(new TodoModel(this, Utils.uuid(), title, false));
 	}
 
 	@action
-	toggleAll (checked) {
+	toggleAll(checked) {
 		this.todos.forEach(
 			todo => todo.completed = checked
 		);
 	}
 
 	@action
-	clearCompleted () {
+	clearCompleted() {
 		this.todos = this.todos.filter(
 			todo => !todo.completed
 		);
@@ -51,9 +56,11 @@ export default class TodoStore {
 		return this.todos.map(todo => todo.toJS());
 	}
 
-	static fromJS(array) {
-		const todoStore = new TodoStore();
+	static fromJS(rootStore, array) {
+		const todoStore = new TodoStore(rootStore);
+
 		todoStore.todos = array.map(item => TodoModel.fromJS(todoStore, item));
+
 		return todoStore;
 	}
 }

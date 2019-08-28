@@ -22,7 +22,7 @@ app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output
 app.use(webpackHotMiddleware(compiler));
 
 const renderFullPage = html => {
-	const initialState = { todos };
+	const initialState = { todos, tags };
 	const initialStateJSON = escape( // So safe!
 		JSON.stringify(initialState),
 		{ wrap: true, isScriptContext: true, json: true }
@@ -53,23 +53,24 @@ const renderFullPage = html => {
 };
 
 let todos = []; // Todos are stored here
+let tags = []; // Tags are stored here
 
 app.use(bodyParser.json());
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
 	// const todoStore = TodoStore.fromJS(todos);
 	// const viewStore = new ViewStore();
-  //
+	//
 	// const initView = renderToString((
 	// 	<TodoApp todoStore={todoStore} viewStore={viewStore} />
 	// ));
-  //
+	//
 	const page = renderFullPage('');
 
 	res.status(200).send(page);
 });
 
-app.post('/api/todos', function(req, res) {
+app.post('/api/todos', function (req, res) {
 	todos = req.body.todos;
 	if (Array.isArray(todos)) {
 		console.log(`Updated todos (${todos.length})`);
@@ -79,7 +80,7 @@ app.post('/api/todos', function(req, res) {
 	}
 });
 
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
 	res.status(404).send('Server.js > 404 - Page Not Found');
 });
 
@@ -93,6 +94,6 @@ process.on('uncaughtException', evt => {
 	console.log('uncaughtException: ', evt);
 });
 
-app.listen(3000, function(){
+app.listen(3000, function () {
 	console.log('Listening on port 3000');
 });
