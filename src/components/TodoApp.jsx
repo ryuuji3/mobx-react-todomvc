@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 
-import TodoEntry from './todoEntry';
-import TodoOverview from './todoOverview';
-import TodoFooter from './todoFooter';
+import TodoEntry from './TodoEntry';
+import TodoOverview from './TodoOverview';
+import TodoFooter from './TodoFooter';
 // Temp:
 import TagList from "./TagList";
 import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';

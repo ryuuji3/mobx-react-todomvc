@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 import { ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
 
-import TodoItem from './todoItem';
+import TodoItem from './TodoItem';
 
 @observer
 export default class TodoOverview extends React.Component {

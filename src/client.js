@@ -1,5 +1,5 @@
 import 'todomvc-common';
-import TodoApp from './components/todoApp.js';
+import TodoApp from './components/TodoApp';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import rootStore from "./stores";
@@ -10,8 +10,8 @@ ReactDOM.render(
 );
 
 if (module.hot) {
-  module.hot.accept('./components/todoApp', () => {
-    var NewTodoApp = require('./components/todoApp').default;
+  module.hot.accept('./components/TodoApp', () => {
+    var NewTodoApp = require('./components/TodoApp').default;
 
     ReactDOM.render(
       <NewTodoApp rootStore={rootStore} />,
