@@ -1,0 +1,40 @@
+.Tag {
+    font-size: large;
+    padding: 0.25em 1em 0.25em 1em;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.Tag:hover {
+    cursor: pointer;
+}
+
+.Tag.red {
+    color: white;
+    background-color: red;
+}
+
+.Tag.orange {
+    color: white;
+    background-color: orange;
+}
+
+.Tag.green {
+    color: white;
+    background-color: green;
+}
+
+.Tag.blue {
+    color: white;
+    background-color: blue;
+}
+
+.Tag.violet {
+    color: white;
+    background-color: indigo;
+}
+
+.Tag.black {
+    color: white;
+    background-color: black;
+}

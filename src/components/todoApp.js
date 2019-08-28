@@ -5,6 +5,8 @@ import { observer } from 'mobx-react';
 import TodoEntry from './todoEntry';
 import TodoOverview from './todoOverview';
 import TodoFooter from './todoFooter';
+// Temp:
+import TagList from "./TagList";
 import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
 
 import DevTool from 'mobx-react-devtools';
@@ -12,7 +14,8 @@ import DevTool from 'mobx-react-devtools';
 @observer
 export default class TodoApp extends React.Component {
 	render() {
-		const { todos: todoStore, view: viewStore } = this.props.rootStore;
+		const { rootStore } = this.props;
+		const { todos: todoStore, view: viewStore } = rootStore;
 		return (
 			<div>
 				<DevTool />
@@ -22,6 +25,7 @@ export default class TodoApp extends React.Component {
 				</header>
 				<TodoOverview todoStore={todoStore} viewStore={viewStore} />
 				<TodoFooter todoStore={todoStore} viewStore={viewStore} />
+				<TagList rootStore={rootStore} />
 			</div>
 		);
 	}

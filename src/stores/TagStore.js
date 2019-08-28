@@ -33,7 +33,7 @@ export default class TagStore {
     removeTag(id) {
         const found = this.tags.findIndex(tag => tag.id === id);
 
-        if (found > 0) {
+        if (found > -1) {
             this.tags.splice(found, 1);
         }
     }
@@ -45,7 +45,7 @@ export default class TagStore {
     static fromJS(rootStore, tags) {
         const store = new TagStore(rootStore);
 
-        store.tags = tags.map(tag => TodoModel.fromJS(store, tag));
+        store.tags = tags.map(tag => TagModel.fromJS(store, tag));
 
         return store;
     }
