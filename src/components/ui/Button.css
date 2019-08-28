@@ -1,40 +1,41 @@
-.Tag {
+.Button {
+    display: inline-block;
     font-size: large;
     padding: 0.25em 1em 0.25em 1em;
     border: 1px solid black;
     border-radius: 5px;
 }
 
-.Tag:hover {
+.Button:hover, .Button > *:hover {
     cursor: pointer;
 }
 
-.Tag.red {
+.Button.red {
     color: white;
     background-color: red;
 }
 
-.Tag.orange {
+.Button.orange {
     color: white;
     background-color: orange;
 }
 
-.Tag.green {
+.Button.green {
     color: white;
     background-color: green;
 }
 
-.Tag.blue {
+.Button.blue {
     color: white;
     background-color: blue;
 }
 
-.Tag.violet {
+.Button.violet {
     color: white;
     background-color: indigo;
 }
 
-.Tag.black {
+.Button.black {
     color: white;
     background-color: black;
 }

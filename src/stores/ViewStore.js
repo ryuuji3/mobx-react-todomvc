@@ -5,6 +5,7 @@ export default class ViewStore {
 	rootStore;
 	@observable todoBeingEdited = null;
 	@observable todoFilter = ALL_TODOS;
+	@observable tagBeingRenamed = null;
 
 	constructor(rootStore) {
 		this.rootStore = rootStore;

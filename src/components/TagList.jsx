@@ -1,23 +1,28 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import Tag from "./Tag";
+import { observer } from "mobx-react";
 
-function renderList(store) {
-    const { tags } = store;
+@observer
+export default class TagList extends React.Component {
+    render() {
+        const { rootStore } = this.props;
+        const { tags } = rootStore;
+        const list = this.renderList(tags);
 
-    return tags.map((tag, key) => <Tag tag={tag} key={key} />)
-}
-
-export default function TagList(props) {
-    const { rootStore } = props;
-    const { tags } = rootStore;
-    const list = renderList(tags);
-
-    return <div className="TagList">
-        <div>
-            {list}
+        return <div className="TagList">
+            <input type="text" placeholder="Create a new tag..." />
+            <div>
+                {list}
+            </div>
         </div>
-    </div>
+    }
+
+    renderList(store) {
+        const { tags } = store;
+
+        return tags.map((tag, key) => <Tag store={store} tag={tag} key={key} />)
+    }
 }
 
 TagList.propTypes = {
