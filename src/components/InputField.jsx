@@ -9,19 +9,25 @@ const ENTER_KEY = 13;
 @observer
 export default class InputField extends React.Component {
 	render() {
-		const { classes, placeholder } = this.props;
+		const { classes, placeholder, value } = this.props;
 
 		return <input
+			value={value}
 			ref="newField"
 			className={classes}
 			placeholder={placeholder}
-			onKeyDown={this.handleNewTodoKeyDown}
+			onKeyDown={this.handleKeyDown}
+			onFocus={this.handleFocus}
+			onChange={this.handleInput}
 			autoFocus={true}
 		/>;
 	}
 
-	@action
-	handleNewTodoKeyDown = (event) => {
+	handleKeyDown = event => {
+		if (this.props.onKeyDown) {
+			this.props.onKeyDown(event);
+		}
+
 		if (event.keyCode !== ENTER_KEY) {
 			return;
 		}
@@ -31,14 +37,29 @@ export default class InputField extends React.Component {
 		const val = ReactDOM.findDOMNode(this.refs.newField).value.trim();
 
 		if (val) {
-			this.props.onInput(val); // Submit value to parent component
+			this.props.onEnter(val); // Submit value to parent component
 			ReactDOM.findDOMNode(this.refs.newField).value = ''; // Reset value
 		}
 	};
+
+	handleInput = event => {
+		if (this.props.onInput) {
+			this.props.onInput(event.target.value);
+		}
+	}
+
+	handleFocus = event => {
+		if (this.props.onFocus) {
+			this.props.onFocus(event); // Broadcast when focused 
+		}
+	}
 }
 
 InputField.propTypes = {
+	value: PropTypes.string,
 	classes: PropTypes.string,
 	placeholder: PropTypes.string.isRequired,
-	onInput: PropTypes.func.isRequired
+	onEnter: PropTypes.func.isRequired,
+	onKeyDown: PropTypes.func,
+	onInput: PropTypes.func,
 };

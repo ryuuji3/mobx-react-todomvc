@@ -14,8 +14,20 @@ export default function Button(props) {
     const classes = `Button ${color}`;
 
     // Use default handlers if none provided
-    const clickHandler = onClick || defaultHandler;
-    const dismissHandler = onDismiss || defaultHandler;
+    const clickHandler = e => {
+        if (onClick) {
+            onClick(e);
+        } else {
+            defaultHandler(e);
+        }
+    };
+    const dismissHandler = e => {
+        if (onDismiss) {
+            onDismiss(e);
+        } else {
+            defaultHandler(e);
+        }
+    };
 
     return <div className={classes}>
         <button type="button" onClick={clickHandler}>

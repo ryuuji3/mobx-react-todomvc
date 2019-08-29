@@ -11,19 +11,13 @@ export default class Tag extends React.Component {
         return <Button
             text={tag.name}
             color={tag.color}
-            onClick={this.onClick.bind(this)}
-            onDismiss={this.onDismiss.bind(this)}
+            onDismiss={this.onDismiss}
             dismissable
         />;
     }
 
     @action
-    onDismiss(e) {
-        e.preventDefault();
-    }
-
-    @action
-    onClick(e) {
-        e.preventDefault();
+    onDismiss = () => {
+        this.props.store.removeTag(this.props.tag.id);
     }
 }

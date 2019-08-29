@@ -6,15 +6,11 @@ import { observer } from "mobx-react";
 @observer
 export default class TagList extends React.Component {
     render() {
-        const { rootStore } = this.props;
-        const { tags } = rootStore;
-        const list = this.renderList(tags);
+        const list = this.renderList(this.props.tagStore);
 
         return <div className="TagList">
-            <input type="text" placeholder="Create a new tag..." />
-            <div>
-                {list}
-            </div>
+            {list}
+            { this.props.children }
         </div>
     }
 
@@ -26,5 +22,5 @@ export default class TagList extends React.Component {
 }
 
 TagList.propTypes = {
-    rootStore: PropTypes.object.isRequired
+    tagStore: PropTypes.object.isRequired
 };

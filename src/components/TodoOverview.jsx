@@ -8,9 +8,12 @@ import TodoItem from './TodoItem';
 @observer
 export default class TodoOverview extends React.Component {
 	render() {
-		const {todoStore, viewStore} = this.props;
-		if (todoStore.todos.length === 0)
+		const {todoStore} = this.props;
+
+		if (todoStore.todos.length === 0) {
 			return null;
+		}
+
 		return <section className="main">
 			<input
 				className="toggle-all"
@@ -21,15 +24,19 @@ export default class TodoOverview extends React.Component {
 			/>
 			<label htmlFor="toggle-all"></label>
 			<ul className="todo-list">
-				{this.getVisibleTodos().map(todo =>
-					(<TodoItem
-						key={todo.id}
-						todo={todo}
-						viewStore={viewStore}
-					/>)
-				)}
+				{this.renderTodos()}
 			</ul>
 		</section>
+	}
+
+	renderTodos = () => {
+		return this.getVisibleTodos().map((todo, key) =>
+			<TodoItem
+				key={key}
+				todo={todo}
+				viewStore={this.props.viewStore}
+			/>
+		);
 	}
 
 	getVisibleTodos() {
