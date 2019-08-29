@@ -6,38 +6,59 @@ import { observable, action } from 'mobx';
 
 @observer
 export default class TodoEntry extends React.Component {
-	@observable note = "";
+	@observable title = "";
 	@observable tags = [];
 
+	constructor(props) {
+		super(props);
+
+		const { todo } = this.props;
+
+		this.reset(todo);
+	}
+
 	render() {
+		const { classes, onKeyDown } = this.props;
+
 		return <div>
 			<InputField 
-				value={this.note}
-				classes="new-todo" 
+				value={this.title}
+				classes={classes} 
 				placeholder="What needs to be done?" 
 				onEnter={this.onEnter}
 				onInput={this.onInput}
+				onKeyDown={onKeyDown}
 			/>
 		</div>
 	}
 
 	@action
 	onEnter = value => {
-		const { todoStore, tag } = this.props;
+		const { todoStore, todo: existing, onSubmit } = this.props;
+		const trimmed = value.trim();
+		let todo = existing || null;
 
-		if (tag) {
-			// edit
+		if (todo) {
+			if (trimmed) {
+				todo.setTitle(value);
+				todo.addTags(this.tags);
+			} else {
+				todo = null;
+			}
 		} else {
-			todoStore.addTodo(value, this.tags);
+			todo = todoStore.addTodo(value, this.tags);
 		}
 
-		this.note = "";
-		this.tags = [];
+		if (onSubmit) {
+			onSubmit(todo);
+		}
+
+		this.reset(todo);
 	};
 
 	@action
 	onInput = value => {
-		this.note = value;
+		this.title = value;
 
 		const annotationExp = /@[\w]{1,}\s$/;
 		const annotations = value.match(annotationExp); // "@[tag] "
@@ -45,7 +66,7 @@ export default class TodoEntry extends React.Component {
 		if (annotations && annotations.length) {
 			const tag = this.props.tagStore.addTag(annotations[0].substring(1).trim());
 			
-			this.note = value.replace(annotationExp, "").trim(); // remove annotations
+			this.title = value.replace(annotationExp, "").trim(); // remove annotations
 			this.addTag(tag);
 		}
 	}
@@ -56,10 +77,19 @@ export default class TodoEntry extends React.Component {
 			this.tags.push(id);
 		}
 	}
+
+	@action
+	reset = ({ title = "", tags = []} = {}) => {
+		this.title = title;
+		this.tags = tags;
+	}
 }
 
 TodoEntry.propTypes = {
 	todoStore: PropTypes.object.isRequired,
 	tagStore: PropTypes.object.isRequired,
-	tag: PropTypes.object
+	todo: PropTypes.object,
+	classes: PropTypes.string,
+	onSubmit: PropTypes.func,
+	onKeyDown: PropTypes.func
 };

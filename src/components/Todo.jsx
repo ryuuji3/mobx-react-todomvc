@@ -15,10 +15,10 @@ export default class Todo extends React.Component {
             <div className="todoapp">
                 <header className="header">
                     <h1>todos</h1>
-                    <TodoEntry todoStore={todoStore} tagStore={tagStore} />
+                    <TodoEntry todoStore={todoStore} tagStore={tagStore} classes="new-todo" />
                 </header>
                 <div>
-                    <TodoOverview todoStore={todoStore} viewStore={viewStore} />
+                    <TodoOverview todoStore={todoStore} tagStore={tagStore} viewStore={viewStore} />
                     <TodoFooter todoStore={todoStore} viewStore={viewStore} />
                 </div>
             </div>
