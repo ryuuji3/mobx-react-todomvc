@@ -32,6 +32,8 @@ export default class ViewStore {
 
 	@computed
 	get visibleTags() {
+		const visibleTags = this.tagFilter ? [this.rootStore.tags.findById(this.tagFilter)] : [];
+
 		return this.rootStore.todos.todos.reduce((visible, todo) => {
 			if (todo.tags.length) {
 				todo.tags.forEach(id => {
@@ -42,7 +44,7 @@ export default class ViewStore {
 			}
 
 			return visible;
-		}, []);
+		}, visibleTags);
 	}
 
 	@action
