@@ -6,9 +6,7 @@ import { computed, action } from "mobx";
 @observer
 export default class TagFooter extends React.Component {
     render() {
-        const { tags } = this.props.tagStore;
-
-        return <TagList tags={tags} onDismiss={this.removeTag} onClick={this.filterTag} activeTag={this.activeTag} />;
+        return <TagList tags={this.props.viewStore.visibleTags} onDismiss={this.removeTag} onClick={this.filterTag} activeTag={this.activeTag} />;
     }
 
     @action

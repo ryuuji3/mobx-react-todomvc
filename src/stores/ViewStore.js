@@ -30,6 +30,21 @@ export default class ViewStore {
 		})
 	}
 
+	@computed
+	get visibleTags() {
+		return this.rootStore.todos.todos.reduce((visible, todo) => {
+			if (todo.tags.length) {
+				todo.tags.forEach(id => {
+					if (!visible.find(tag => tag.id === id)) {
+						visible.push(this.rootStore.tags.findById(id));
+					}
+				})
+			}
+
+			return visible;
+		}, []);
+	}
+
 	@action
 	removeTag(id) {
 		if (this.tagFilter === id) {
