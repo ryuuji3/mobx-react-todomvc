@@ -46,7 +46,10 @@ export default class TagStore {
         const found = this.tags.findIndex(tag => tag.id === id);
 
         if (found > -1) {
+            const { id } = this.tags[found]; // get ID before deleting
+
             this.tags.splice(found, 1);
+            this.rootStore.todos.removeTag(id);
         }
     }
 

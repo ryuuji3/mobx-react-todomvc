@@ -5,16 +5,28 @@ import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
 import Todo from "./Todo";
 
 import DevTool from 'mobx-react-devtools';
+import TagList from './TagList';
 
 @observer
 export default class App extends React.Component {
 	render() {
 		const { rootStore } = this.props;
-
+		const { tags: tagStore } = rootStore;
 		return (
 			<div>
 				<DevTool />
-				<Todo rootStore={rootStore} />
+				<div>
+					<section className="todoapp">
+						<Todo rootStore={rootStore} />
+					</section>
+					<TagList tagStore={tagStore} />
+				</div>
+				<footer className="info">
+					<p>Double-click to edit a todo. Tag a todo by typing @ followed by your tag and a space.</p>
+					<p>TodoMVC powered by React and <a href="http://github.com/mobxjs/mobx/">MobX</a>. Created by <a href="http://github.com/mweststrate/">mweststrate</a></p>
+					<p>Based on the base React TodoMVC by <a href="http://github.com/petehunt/">petehunt</a></p>
+					<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+				</footer>
 			</div>
 		);
 	}

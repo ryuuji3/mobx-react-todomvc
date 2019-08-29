@@ -3,7 +3,6 @@ import TodoEntry from './TodoEntry';
 import TodoOverview from './TodoOverview';
 import TodoFooter from './TodoFooter';
 import { observer } from "mobx-react";
-import TagList from "./TagList";
 
 @observer
 export default class Todo extends React.Component {
@@ -19,7 +18,6 @@ export default class Todo extends React.Component {
             <div>
                 <TodoOverview todoStore={todoStore} viewStore={viewStore} />
                 <TodoFooter todoStore={todoStore} viewStore={viewStore} />
-                <TagList tagStore={tagStore} />
             </div>
         </div>
     }

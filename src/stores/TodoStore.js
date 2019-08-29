@@ -52,6 +52,17 @@ export default class TodoStore {
 		);
 	}
 
+	@action
+	removeTag(id) {
+		this.todos.forEach(todo => {
+			const found = todo.tags.findIndex(tag => tag === id);
+
+			if (found > -1) {
+				todo.tags.splice(found, 1);
+			}
+		})
+	}
+
 	toJS() {
 		return this.todos.map(todo => todo.toJS());
 	}

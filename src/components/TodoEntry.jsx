@@ -29,6 +29,11 @@ export default class TodoEntry extends React.Component {
 
 	onEnter = value => {
 		this.props.todoStore.addTodo(value, this.state.tags);
+
+		this.setState({
+			value: "",
+			tags: []
+		});
 	};
 
 	onInput = value => {
@@ -52,10 +57,9 @@ export default class TodoEntry extends React.Component {
 	}
 
 	addTag = ({ id }) => {
-		if (this.state.tags.findIndex(tag => tag.id === id) > -1) {
+		if (this.state.tags.findIndex(tag => tag.id === id) === -1) {
 			this.setState({
-				value: note,
-				tags: [...this.state.tags, tag.id]
+				tags: [...this.state.tags, id]
 			});
 		}
 	}
