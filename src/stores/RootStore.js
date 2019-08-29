@@ -1,6 +1,6 @@
-import TodoStore from "./TodoStore";
-import TagStore from "./TagStore";
-import ViewStore from "./ViewStore";
+import TodoStore from './TodoStore';
+import TagStore from './TagStore';
+import ViewStore from './ViewStore';
 
 export default class RootStore {
     constructor() {

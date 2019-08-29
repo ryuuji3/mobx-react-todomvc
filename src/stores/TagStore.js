@@ -1,6 +1,5 @@
-import { observable, action, reaction } from "mobx";
-import TodoModel from "../models/TodoModel";
-import TagModel from "../models/TagModel";
+import { observable, action, reaction } from 'mobx';
+import TagModel from '../models/TagModel';
 import * as Utils from '../utils';
 
 export default class TagStore {
@@ -14,7 +13,7 @@ export default class TagStore {
     subscribeServerToStore() {
         reaction(
             () => this.toJS(),
-            tags => window.fetch && fetch(`/api/tags`, {
+            tags => window.fetch && fetch('/api/tags', {
                 method: 'post',
                 body: JSON.stringify({ tags }),
                 headers: new Headers({ 'Content-Type': 'application/json' })

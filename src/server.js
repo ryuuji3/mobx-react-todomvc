@@ -70,7 +70,7 @@ app.post('/api/todos', function (req, res) {
 		console.log(`Updated todos (${todos.length})`);
 		res.status(201).send(JSON.stringify({ success: true }));
 	} else {
-		res.status(200).send(JSON.stringify({ success: false, error: "expected `todos` to be array" }));
+		res.status(200).send(JSON.stringify({ success: false, error: 'expected `todos` to be array' }));
 	}
 });
 
@@ -78,10 +78,10 @@ app.get('*', function (req, res) {
 	res.status(404).send('Server.js > 404 - Page Not Found');
 });
 
-app.use((err, req, res, next) => {
-	console.error("Error on request %s %s", req.method, req.url);
+app.use((err, req, res) => {
+	console.error('Error on request %s %s', req.method, req.url);
 	console.error(err.stack);
-	res.status(500).send("Server error");
+	res.status(500).send('Server error');
 });
 
 process.on('uncaughtException', evt => {

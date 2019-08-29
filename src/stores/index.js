@@ -1,6 +1,6 @@
-import RootStore from "./RootStore";
-import TodoStore from "./TodoStore";
-import TagStore from "./TagStore";
+import RootStore from './RootStore';
+import TodoStore from './TodoStore';
+import TagStore from './TagStore';
 
 const initialState = window.initialState && JSON.parse(window.initialState) || {};
 

@@ -2,7 +2,7 @@ import 'todomvc-common';
 import App from './components/App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import rootStore from "./stores";
+import rootStore from './stores';
 
 ReactDOM.render(
   <App rootStore={rootStore} />,

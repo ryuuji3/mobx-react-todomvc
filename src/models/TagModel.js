@@ -1,4 +1,4 @@
-import { observable } from "mobx";
+import { observable } from 'mobx';
 
 export default class TagModel {
     store;
@@ -12,7 +12,7 @@ export default class TagModel {
         this.name = name;
 
         if (!color) {
-            color = "red";
+            color = 'red';
         }
         
         this.color = color;
