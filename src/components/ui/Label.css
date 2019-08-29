@@ -1,0 +1,42 @@
+.Label {
+    font-size: x-small;
+    border: 1px solid black;
+    border-radius: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 1px 20px 1px 20px;
+    display: inline-block;
+    border-color: white;
+    background-color: black;
+    color: white;
+}
+
+.Label.red {
+    border-color: red;
+    color: white;
+    background-color: red;
+}
+
+.Label.orange {
+    color: white;
+    background-color: orange;
+    border-color: orange;
+}
+
+.Label.green {
+    color: white;
+    background-color: green;
+    border-color: green;
+}
+
+.Label.blue {
+    color: white;
+    background-color: blue;
+    border-color: blue;
+}
+
+.Label.violet {
+    color: indigo;
+    background-color: white;
+    border-color: indigo;
+}

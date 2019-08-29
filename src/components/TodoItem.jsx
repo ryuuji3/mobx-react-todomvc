@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 import {action, computed} from 'mobx';
 import TodoEntry from './TodoEntry';
+import Label from "./ui/Label";
+import TagLabel from './TagLabel';
 
 const ESCAPE_KEY = 27;
 
@@ -25,6 +27,9 @@ export default class TodoItem extends React.Component {
 					/>
 					<label onDoubleClick={this.handleEdit}>
 						{todo.title}
+						<small>
+							{ this.renderTags() }
+						</small>
 					</label>
 					<button className="destroy" onClick={this.handleDestroy} />
 				</div>
@@ -41,6 +46,14 @@ export default class TodoItem extends React.Component {
 				}
 			</li>
 		);
+	}
+
+	renderTags = () => {
+		return this.props.todo.tags.map((id, key) => {
+			const tag = this.props.tagStore.findById(id);
+
+			return <TagLabel key={key} tag={tag} />
+		})
 	}
 
 	@computed

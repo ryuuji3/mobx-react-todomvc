@@ -71,3 +71,9 @@
     background-color: white;
     border-color: indigo;
 }
+
+.Button.violet.active {
+    color: white;
+    background-color: indigo;
+    border-color: indigo;
+}

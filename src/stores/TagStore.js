@@ -26,6 +26,10 @@ export default class TagStore {
         return this.tags.find(tag => tag.name === exactMatch);
     }
 
+    findById(id) {
+        return this.tags.find(tag => tag.id === id);
+    }
+
     @action
     addTag(name, color) {
         const existing = this.find(name);
