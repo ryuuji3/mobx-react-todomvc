@@ -1,17 +1,18 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import Tag from "./Tag";
-import { observer } from "mobx-react";
-import "./TagList.css";
+import Tag from './Tag';
+import { observer } from 'mobx-react';
+import './TagList.css';
 
 @observer
-export default class TagList extends React.Component {
+class TagList extends React.Component {
     render() {
         const list = this.renderList(this.props);
-        const classes = `TagList ${this.props.classes ? this.props.classes : ""}`;
+        const classes = `TagList ${this.props.classes ? this.props.classes : ''}`;
 
         return <div className={classes}>
             {list}
+            {this.props.children}
         </div>
     }
 
@@ -37,5 +38,8 @@ TagList.propTypes = {
     tags: PropTypes.oneOfType([PropTypes.object,PropTypes.array]).isRequired,
     onDismiss: PropTypes.func,
     onClick: PropTypes.func,
-    activeTag: PropTypes.string
+    activeTag: PropTypes.string,
+    children: PropTypes.element
 };
+
+export default TagList;

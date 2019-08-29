@@ -1,11 +1,11 @@
-import React from "react";
-import Button from "./ui/Button";
+import React from 'react';
+import Button from './ui/Button';
 import PropTypes from 'prop-types';
-import { observer } from "mobx-react";
-import { action } from "mobx";
+import { observer } from 'mobx-react';
+import { action } from 'mobx';
 
 @observer
-export default class Tag extends React.Component {
+class Tag extends React.Component {
     render() {
         const { tag, active } = this.props;
 
@@ -45,3 +45,5 @@ Tag.propTypes = {
     onDismiss: PropTypes.func,
     onClick: PropTypes.func
 }
+
+export default Tag;

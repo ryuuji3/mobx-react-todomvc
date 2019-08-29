@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import "./Button.css";
-import { defaultHandler } from "../../utils";
+import './Button.css';
+import { defaultHandler } from '../../utils';
 
 function dismissButton(handler) {
     return <span>&nbsp;
@@ -11,7 +11,7 @@ function dismissButton(handler) {
 
 export default function Button(props) {
     const { text, color, active, dismissable, onClick, onDismiss } = props;
-    const classes = `Button ${color ? color: ""} ${active ? "active" : ""}`;
+    const classes = `Button ${color ? color: ''} ${active ? 'active' : ''} ${props.classes ? props.classes : ''}`;
 
     // Use default handlers if none provided
     const clickHandler = e => {
@@ -38,7 +38,7 @@ export default function Button(props) {
 }
 
 Button.propTypes = {
-    text: PropTypes.string.isRequired,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
     color: PropTypes.string,
     classes: PropTypes.string,
     dismissable: PropTypes.bool,

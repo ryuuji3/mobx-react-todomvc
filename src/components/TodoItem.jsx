@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 import {action, computed} from 'mobx';
 import TodoEntry from './TodoEntry';
-import Label from "./ui/Label";
 import TagLabel from './TagLabel';
-import TagList from './TagList';
 
 const ESCAPE_KEY = 27;
 
 @observer
-export default class TodoItem extends React.Component {
+class TodoItem extends React.Component {
 	render() {
 		const {todo, todoStore, tagStore} = this.props;
 
 		return (
 			<li className={[
-				todo.completed ? "completed": "",
-				this.isBeingEdited ? "editing" : ""
-			].join(" ")}>
+				todo.completed ? 'completed': '',
+				this.isBeingEdited ? 'editing' : ''
+			].join(' ')}>
 				<div className="view">
 					<input
 						className="toggle"
@@ -109,3 +107,5 @@ TodoItem.propTypes = {
 	tagStore: PropTypes.object.isRequired,
 	viewStore: PropTypes.object.isRequired
 };
+
+export default TodoItem;

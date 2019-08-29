@@ -1,0 +1,19 @@
+.TagField {
+    display: inline-block;
+}
+
+.TagField > .Tag.Button:hover, .TagField > .Tag.Button > *:hover {
+    cursor: auto;
+}
+
+.TagField > .Tag > input {
+    background-color: transparent;
+    border: 0;
+    width: 60px;
+}
+
+.TagList .Button.grey-outline {
+    background-color: white;
+    color: gray;
+    border: 2px solid grey;
+}

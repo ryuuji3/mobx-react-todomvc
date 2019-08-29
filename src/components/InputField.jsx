@@ -1,24 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
-import {action} from 'mobx';
 
 const ENTER_KEY = 13;
 
-@observer
-export default class InputField extends React.Component {
+@observer 
+class InputField extends React.Component {
 	render() {
 		const { classes, placeholder, value } = this.props;
 
 		return <input
 			value={value}
-			ref="newField"
 			className={classes}
 			placeholder={placeholder}
 			onKeyDown={this.handleKeyDown}
 			onFocus={this.handleFocus}
 			onChange={this.handleInput}
+			onBlur={this.handleBlur}
 			autoFocus={true}
 		/>;
 	}
@@ -34,11 +32,10 @@ export default class InputField extends React.Component {
 
 		event.preventDefault();
 
-		const val = ReactDOM.findDOMNode(this.refs.newField).value.trim();
+		const val = this.props.value.trim();
 
 		if (val) {
 			this.props.onEnter(val); // Submit value to parent component
-			ReactDOM.findDOMNode(this.refs.newField).value = ''; // Reset value
 		}
 	};
 
@@ -53,6 +50,12 @@ export default class InputField extends React.Component {
 			this.props.onFocus(event); // Broadcast when focused 
 		}
 	}
+
+	handleBlur = event => {
+		if (this.props.onBlur) {
+			this.props.onBlur(event);
+		}
+	}
 }
 
 InputField.propTypes = {
@@ -62,4 +65,8 @@ InputField.propTypes = {
 	onEnter: PropTypes.func.isRequired,
 	onKeyDown: PropTypes.func,
 	onInput: PropTypes.func,
+	onFocus: PropTypes.func,
+	onBlur: PropTypes.func
 };
+
+export default InputField;

@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
-import InputField from "./InputField";
+import InputField from './InputField';
 import { observable, action, computed } from 'mobx';
-import TagList from "./TagList";
-import "./TodoEntry.css";
+import TagList from './TagList';
+import './TodoEntry.css';
+import TagField from './TagField';
 
 @observer
-export default class TodoEntry extends React.Component {
-	@observable title = "";
+class TodoEntry extends React.Component {
+	@observable title = '';
 	@observable tags = [];
 
 	constructor(props) {
@@ -20,7 +21,7 @@ export default class TodoEntry extends React.Component {
 	}
 
 	render() {
-		const { classes, onKeyDown } = this.props;
+		const { classes, onKeyDown, tagStore } = this.props;
 
 		return <div className="TodoEntry">
 			<InputField 
@@ -31,7 +32,9 @@ export default class TodoEntry extends React.Component {
 				onInput={this.onInput}
 				onKeyDown={onKeyDown}
 			/>
-			<TagList classes="note-tag-list" tags={this.loadedTags} onDismiss={this.removeTagFromTodo} />
+			<TagList classes="note-tag-list" tags={this.loadedTags} onDismiss={this.removeTagFromTodo}>
+				<TagField tagStore={tagStore} onSubmit={this.addTag} />
+			</TagList>
 		</div>
 	}
 
@@ -75,7 +78,7 @@ export default class TodoEntry extends React.Component {
 		if (annotations && annotations.length) {
 			const tag = this.props.tagStore.addTag(annotations[0].substring(1).trim());
 			
-			this.title = value.replace(annotationExp, "").trim(); // remove annotations
+			this.title = value.replace(annotationExp, '').trim(); // remove annotations
 			this.addTag(tag);
 		}
 	}
@@ -88,7 +91,7 @@ export default class TodoEntry extends React.Component {
 	}
 
 	@action
-	reset = ({ title = "", tags = []} = {}) => {
+	reset = ({ title = '', tags = []} = {}) => {
 		this.title = title;
 		this.tags = tags;
 	}
@@ -122,3 +125,5 @@ TodoEntry.propTypes = {
 	onSubmit: PropTypes.func,
 	onKeyDown: PropTypes.func
 };
+
+export default TodoEntry;
