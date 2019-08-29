@@ -28,7 +28,21 @@ export default class TodoModel {
 	}
 	
 	addTags(tags) {
-		tags.forEach(tag => this.tags.push(tag));
+		tags.forEach(tag => this.addTag(tag));
+	}
+
+	addTag(tag) {
+		if (this.tags.findIndex(id => id === tag) === -1) {
+			this.tags.push(tag);
+		}
+	}
+
+	removeTag(id) {
+		const found = this.tags.findIndex(tag => tag === id);
+
+		if (found > -1) {
+			this.tags.splice(found, 1);
+		}
 	}
 
 	toJS() {

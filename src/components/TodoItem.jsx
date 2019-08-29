@@ -5,6 +5,7 @@ import {action, computed} from 'mobx';
 import TodoEntry from './TodoEntry';
 import Label from "./ui/Label";
 import TagLabel from './TagLabel';
+import TagList from './TagList';
 
 const ESCAPE_KEY = 27;
 
@@ -12,6 +13,7 @@ const ESCAPE_KEY = 27;
 export default class TodoItem extends React.Component {
 	render() {
 		const {todo, todoStore, tagStore} = this.props;
+		const tags = todo.tags.map(id => tagStore.findById(id));
 
 		return (
 			<li className={[
@@ -34,6 +36,7 @@ export default class TodoItem extends React.Component {
 					<button className="destroy" onClick={this.handleDestroy} />
 				</div>
 				{ this.isBeingEdited ? 
+					<div>
 					<TodoEntry
 						classes="edit"
 						todoStore={todoStore}
@@ -42,6 +45,8 @@ export default class TodoItem extends React.Component {
 						onSubmit={this.handleSubmit}
 						onKeyDown={this.handleKeyDown} 
 					/>
+					<TagList tags={tags} onDismiss={this.removeTagFromTodo} />
+					</div>
 					: null 
 				}
 			</li>
@@ -93,6 +98,10 @@ export default class TodoItem extends React.Component {
 	@action
 	handleToggle = () => {
 		this.props.todo.toggle();
+	};
+
+	removeTagFromTodo = tag => {
+		this.props.todo.removeTag(tag.id);
 	};
 }
 

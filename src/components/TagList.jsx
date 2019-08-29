@@ -31,7 +31,7 @@ export default class TagList extends React.Component {
 }
 
 TagList.propTypes = {
-    tags: PropTypes.object.isRequired,
+    tags: PropTypes.oneOfType([PropTypes.object,PropTypes.array]).isRequired,
     onDismiss: PropTypes.func,
     onClick: PropTypes.func,
     activeTag: PropTypes.string
