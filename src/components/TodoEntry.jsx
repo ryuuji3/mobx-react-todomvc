@@ -45,15 +45,21 @@ export default class TodoEntry extends React.Component {
 			} else {
 				todo = null;
 			}
+
+			if (onSubmit) {
+				onSubmit(todo);
+			}
+
+			this.reset(todo);
 		} else {
 			todo = todoStore.addTodo(value, this.tags);
-		}
 
-		if (onSubmit) {
-			onSubmit(todo);
-		}
+			if (onSubmit) {
+				onSubmit(todo);
+			}
 
-		this.reset(todo);
+			this.reset();
+		}
 	};
 
 	@action

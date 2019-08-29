@@ -10,6 +10,11 @@ export default class TagModel {
         this.store = store;
         this.id = id;
         this.name = name;
+
+        if (!color) {
+            color = "red";
+        }
+        
         this.color = color;
     }
 

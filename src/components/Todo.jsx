@@ -23,7 +23,7 @@ export default class Todo extends React.Component {
                 </div>
             </div>
             <div>
-                <TagFooter tagStore={tagStore} />
+                <TagFooter tagStore={tagStore} viewStore={viewStore} />
             </div>
         </div>
     }

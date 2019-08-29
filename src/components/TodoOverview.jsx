@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
-import { ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
-
 import TodoItem from './TodoItem';
+import { computed } from 'mobx';
 
 @observer
 export default class TodoOverview extends React.Component {
@@ -24,13 +23,14 @@ export default class TodoOverview extends React.Component {
 			/>
 			<label htmlFor="toggle-all"></label>
 			<ul className="todo-list">
-				{this.renderTodos()}
+				{this.renderTodos}
 			</ul>
 		</section>
 	}
 
-	renderTodos = () => {
-		return this.getVisibleTodos().map((todo, key) =>
+	@computed
+	get renderTodos () {
+		return this.visibleTodos.map((todo, key) =>
 			<TodoItem
 				key={key}
 				todo={todo}
@@ -41,17 +41,9 @@ export default class TodoOverview extends React.Component {
 		);
 	}
 
-	getVisibleTodos() {
-		return this.props.todoStore.todos.filter(todo => {
-			switch (this.props.viewStore.todoFilter) {
-				case ACTIVE_TODOS:
-					return !todo.completed;
-				case COMPLETED_TODOS:
-					return todo.completed;
-				default:
-					return true;
-			}
-		});
+	@computed
+	get visibleTodos() {
+		return this.props.viewStore.visibleTodos;
 	}
 
 	toggleAll = (event) => {

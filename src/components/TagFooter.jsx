@@ -1,16 +1,32 @@
 import React from "react";
 import { observer } from "mobx-react";
 import TagList from "./TagList";
+import { computed, action } from "mobx";
 
 @observer
 export default class TagFooter extends React.Component {
     render() {
         const { tags } = this.props.tagStore;
 
-        return <TagList tags={tags} onDismiss={this.removeTag} />;
+        return <TagList tags={tags} onDismiss={this.removeTag} onClick={this.filterTag} activeTag={this.activeTag} />;
     }
 
+    @action
     removeTag = ({ id }) => {
         this.props.tagStore.removeTag(id);
+    }
+
+    @action
+    filterTag = ({ id }) => {
+        if (this.props.viewStore.tagFilter === id) {
+            this.props.viewStore.tagFilter = null; // toggle filter
+        } else {
+            this.props.viewStore.tagFilter = id;
+        }
+    }
+
+    @computed
+    get activeTag() {
+        return this.props.viewStore.tagFilter;
     }
 }

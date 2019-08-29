@@ -10,8 +10,8 @@ function dismissButton(handler) {
 }
 
 export default function Button(props) {
-    const { text, color, dismissable, onClick, onDismiss } = props;
-    const classes = `Button ${color}`;
+    const { text, color, active, dismissable, onClick, onDismiss } = props;
+    const classes = `Button ${color ? color: ""} ${active ? "active" : ""}`;
 
     // Use default handlers if none provided
     const clickHandler = e => {
@@ -43,6 +43,7 @@ Button.propTypes = {
     classes: PropTypes.string,
     dismissable: PropTypes.bool,
     onClick: PropTypes.func,
-    onDismiss: PropTypes.func
+    onDismiss: PropTypes.func,
+    active: PropTypes.bool
 }
 

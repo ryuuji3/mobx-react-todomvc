@@ -49,7 +49,8 @@ export default class TagStore {
             const { id } = this.tags[found]; // get ID before deleting
 
             this.tags.splice(found, 1);
-            this.rootStore.todos.removeTag(id);
+            this.rootStore.todos.removeTag(id); // remove from existing todos
+            this.rootStore.view.removeTag(id); // remove filter of old tag
         }
     }
 

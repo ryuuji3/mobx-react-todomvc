@@ -1,4 +1,5 @@
 .Button {
+    color: black;
     background-color: white;
     display: inline-block;
     font-size: large;
@@ -11,32 +12,62 @@
     cursor: pointer;
 }
 
+.Button.active {
+    border-color: white;
+    background-color: black;
+    color: white;
+}
+
 .Button.red {
+    border-color: red;
+    color: red;
+    background-color: white;
+}
+
+.Button.red.active {
+    border-color: red;
     color: white;
     background-color: red;
 }
 
 .Button.orange {
+    color: orange;
+    background-color: white;
+    border-color: orange;
+}
+
+.Button.orange.active {
     color: white;
     background-color: orange;
+    border-color: orange;
 }
 
 .Button.green {
+    color: green;
+    background-color: white;
+    border-color: green;
+}
+
+.Button.green.active {
     color: white;
     background-color: green;
+    border-color: green;
 }
 
 .Button.blue {
+    color: blue;
+    background-color: white;
+    border-color: blue;
+}
+
+.Button.blue.active {
     color: white;
     background-color: blue;
+    border-color: blue;
 }
 
 .Button.violet {
-    color: white;
-    background-color: indigo;
-}
-
-.Button.black {
-    color: white;
-    background-color: black;
+    color: indigo;
+    background-color: white;
+    border-color: indigo;
 }
