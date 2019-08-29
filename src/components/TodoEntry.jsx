@@ -1,24 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
-import {action} from 'mobx';
 import InputField from "./InputField";
+import { observable, action } from 'mobx';
 
 @observer
 export default class TodoEntry extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = { 
-			value: "",
-			tags: []
-		};
-	}
+	@observable note = "";
+	@observable tags = [];
 
 	render() {
 		return <div>
 			<InputField 
-				value={this.state.value}
+				value={this.note}
 				classes="new-todo" 
 				placeholder="What needs to be done?" 
 				onEnter={this.onEnter}
@@ -27,15 +21,21 @@ export default class TodoEntry extends React.Component {
 		</div>
 	}
 
+	@action
 	onEnter = value => {
-		this.props.todoStore.addTodo(value, this.state.tags);
+		const { todoStore, tag } = this.props;
 
-		this.setState({
-			value: "",
-			tags: []
-		});
+		if (tag) {
+			// edit
+		} else {
+			todoStore.addTodo(value, this.tags);
+		}
+
+		this.note = "";
+		this.tags = [];
 	};
 
+	@action
 	onInput = value => {
 		this.note = value;
 
@@ -44,27 +44,22 @@ export default class TodoEntry extends React.Component {
 
 		if (annotations && annotations.length) {
 			const tag = this.props.tagStore.addTag(annotations[0].substring(1).trim());
+			
 			this.note = value.replace(annotationExp, "").trim(); // remove annotations
-
 			this.addTag(tag);
 		}
 	}
 
-	set note(value) {
-		this.setState({
-			value
-		});
-	}
-
+	@action
 	addTag = ({ id }) => {
-		if (this.state.tags.findIndex(tag => tag.id === id) === -1) {
-			this.setState({
-				tags: [...this.state.tags, id]
-			});
+		if (this.tags.findIndex(tag => tag.id === id) === -1) {
+			this.tags.push(id);
 		}
 	}
 }
 
 TodoEntry.propTypes = {
-	todoStore: PropTypes.object.isRequired
+	todoStore: PropTypes.object.isRequired,
+	tagStore: PropTypes.object.isRequired,
+	tag: PropTypes.object
 };
