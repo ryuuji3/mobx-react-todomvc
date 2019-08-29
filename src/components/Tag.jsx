@@ -18,6 +18,10 @@ export default class Tag extends React.Component {
 
     @action
     onDismiss = () => {
-        this.props.store.removeTag(this.props.tag.id);
+        const { onDismiss, tag } = this.props;
+
+        if (onDismiss) {
+            onDismiss(tag);
+        }
     }
 }

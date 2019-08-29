@@ -6,21 +6,25 @@ import { observer } from "mobx-react";
 @observer
 export default class TagList extends React.Component {
     render() {
-        const list = this.renderList(this.props.tagStore);
+        const list = this.renderList(this.props.tags);
 
         return <div className="TagList">
             {list}
-            { this.props.children }
         </div>
     }
 
-    renderList(store) {
-        const { tags } = store;
+    renderList(tags) {
+        return tags.map((tag, key) => <Tag onDismiss={this.onDismiss} tag={tag} key={key} />)
+    }
 
-        return tags.map((tag, key) => <Tag store={store} tag={tag} key={key} />)
+    onDismiss = tag => {
+        if (this.props.onDismiss) {
+            this.props.onDismiss(tag);
+        }
     }
 }
 
 TagList.propTypes = {
-    tagStore: PropTypes.object.isRequired
+    tags: PropTypes.object.isRequired,
+    onDismiss: PropTypes.func
 };

@@ -5,21 +5,19 @@ import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
 import Todo from "./Todo";
 
 import DevTool from 'mobx-react-devtools';
-import TagList from './TagList';
+import TagFooter from './TagFooter';
 
 @observer
 export default class App extends React.Component {
 	render() {
 		const { rootStore } = this.props;
-		const { tags: tagStore } = rootStore;
 		return (
 			<div>
 				<DevTool />
 				<div>
-					<section className="todoapp">
+					<section>
 						<Todo rootStore={rootStore} />
 					</section>
-					<TagList tagStore={tagStore} />
 				</div>
 				<footer className="info">
 					<p>Double-click to edit a todo. Tag a todo by typing @ followed by your tag and a space.</p>
