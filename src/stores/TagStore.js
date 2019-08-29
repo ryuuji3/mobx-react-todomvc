@@ -22,11 +22,23 @@ export default class TagStore {
         );
     }
 
+    find(exactMatch) {
+        return this.tags.find(tag => tag.name === exactMatch);
+    }
+
     @action
     addTag(name, color) {
-        this.tags.push(
-            new TagModel(this, Utils.uuid(), name, color)
-        );
+        const existing = this.find(name);
+
+        if (existing) {
+            return existing;
+        }
+
+        const tag = new TagModel(this, Utils.uuid(), name, color)
+
+        this.tags.push(tag);
+
+        return tag;
     }
 
     @action

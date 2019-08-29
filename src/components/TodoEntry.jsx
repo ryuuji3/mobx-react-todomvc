@@ -9,7 +9,10 @@ export default class TodoEntry extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { value: "" };
+		this.state = { 
+			value: "",
+			tags: []
+		};
 	}
 
 	render() {
@@ -24,28 +27,36 @@ export default class TodoEntry extends React.Component {
 		</div>
 	}
 
-	@action
 	onEnter = value => {
-		this.props.todoStore.addTodo(value);
+		this.props.todoStore.addTodo(value, this.state.tags);
 	};
 
 	onInput = value => {
-		this.setState({
-			value
-		});
+		this.note = value;
 
 		const annotationExp = /@[\w]{1,}\s$/;
 		const annotations = value.match(annotationExp); // "@[tag] "
 
 		if (annotations && annotations.length) {
-			const tag = annotations[0].substring(1).trim();
-			const note = value.replace(annotationExp, "").trim(); // remove annotations
+			const tag = this.props.tagStore.addTag(annotations[0].substring(1).trim());
+			this.note = value.replace(annotationExp, "").trim(); // remove annotations
 
+			this.addTag(tag);
+		}
+	}
+
+	set note(value) {
+		this.setState({
+			value
+		});
+	}
+
+	addTag = ({ id }) => {
+		if (this.state.tags.findIndex(tag => tag.id === id) > -1) {
 			this.setState({
-				value: note
+				value: note,
+				tags: [...this.state.tags, tag.id]
 			});
-
-			this.props.tagStore.addTag(tag);
 		}
 	}
 }

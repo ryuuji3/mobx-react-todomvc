@@ -34,8 +34,8 @@ export default class TodoStore {
 	}
 
 	@action
-	addTodo(title) {
-		this.todos.push(new TodoModel(this, Utils.uuid(), title, false));
+	addTodo(title, tags = []) {
+		this.todos.push(new TodoModel(this, Utils.uuid(), title, false, tags));
 	}
 
 	@action
