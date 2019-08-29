@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Tag from "./Tag";
 import { observer } from "mobx-react";
+import "./TagList.css";
 
 @observer
 export default class TagList extends React.Component {
     render() {
         const list = this.renderList(this.props);
+        const classes = `TagList ${this.props.classes ? this.props.classes : ""}`;
 
-        return <div className="TagList">
+        return <div className={classes}>
             {list}
         </div>
     }
@@ -31,6 +33,7 @@ export default class TagList extends React.Component {
 }
 
 TagList.propTypes = {
+    classes: PropTypes.string,
     tags: PropTypes.oneOfType([PropTypes.object,PropTypes.array]).isRequired,
     onDismiss: PropTypes.func,
     onClick: PropTypes.func,

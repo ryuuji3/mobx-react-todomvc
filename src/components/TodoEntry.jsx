@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 import InputField from "./InputField";
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
+import TagList from "./TagList";
+import "./TodoEntry.css";
 
 @observer
 export default class TodoEntry extends React.Component {
@@ -20,7 +22,7 @@ export default class TodoEntry extends React.Component {
 	render() {
 		const { classes, onKeyDown } = this.props;
 
-		return <div>
+		return <div className="TodoEntry">
 			<InputField 
 				value={this.title}
 				classes={classes} 
@@ -29,6 +31,7 @@ export default class TodoEntry extends React.Component {
 				onInput={this.onInput}
 				onKeyDown={onKeyDown}
 			/>
+			<TagList classes="note-tag-list" tags={this.loadedTags} onDismiss={this.removeTagFromTodo} />
 		</div>
 	}
 
@@ -88,6 +91,26 @@ export default class TodoEntry extends React.Component {
 	reset = ({ title = "", tags = []} = {}) => {
 		this.title = title;
 		this.tags = tags;
+	}
+
+	@action
+	removeTagFromTodo = tag => {
+		const { todo } = this.props;
+
+		if (todo) {
+			this.props.todo.removeTag(tag.id);
+		} else {
+			const found = this.tags.findIndex(id => id === tag.id);
+
+			if (found > -1) {
+				this.tags.splice(found, 1);
+			}
+		}
+	};
+
+	@computed
+	get loadedTags() {
+		return this.tags.map(id => this.props.tagStore.findById(id));
 	}
 }
 

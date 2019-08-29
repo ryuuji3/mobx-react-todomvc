@@ -13,7 +13,6 @@ const ESCAPE_KEY = 27;
 export default class TodoItem extends React.Component {
 	render() {
 		const {todo, todoStore, tagStore} = this.props;
-		const tags = todo.tags.map(id => tagStore.findById(id));
 
 		return (
 			<li className={[
@@ -45,7 +44,6 @@ export default class TodoItem extends React.Component {
 						onSubmit={this.handleSubmit}
 						onKeyDown={this.handleKeyDown} 
 					/>
-					<TagList tags={tags} onDismiss={this.removeTagFromTodo} />
 					</div>
 					: null 
 				}

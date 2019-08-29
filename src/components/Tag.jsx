@@ -9,14 +9,16 @@ export default class Tag extends React.Component {
     render() {
         const { tag, active } = this.props;
 
-        return <Button
-            active={active}
-            text={tag.name}
-            color={tag.color}
-            onDismiss={this.onDismiss}
-            onClick={this.onClick}
-            dismissable
-        />;
+        return <div className="Tag">
+            <Button
+                active={active}
+                text={tag.name}
+                color={tag.color}
+                onDismiss={this.onDismiss}
+                onClick={this.onClick}
+                dismissable
+            />
+        </div>;
     }
 
     @action
