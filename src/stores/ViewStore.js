@@ -34,17 +34,21 @@ export default class ViewStore {
 	get visibleTags() {
 		const visibleTags = this.tagFilter ? [this.rootStore.tags.findById(this.tagFilter)] : [];
 
-		return this.rootStore.todos.todos.reduce((visible, todo) => {
-			if (todo.tags.length) {
-				todo.tags.forEach(id => {
-					if (!visible.find(tag => tag.id === id)) {
-						visible.push(this.rootStore.tags.findById(id));
-					}
-				})
-			}
+		if (!visibleTags.length) {
+			return this.rootStore.todos.todos.reduce((visible, todo) => {
+				if (todo.tags.length) {
+					todo.tags.forEach(id => {
+						if (!visible.find(tag => tag.id === id)) {
+							visible.push(this.rootStore.tags.findById(id));
+						}
+					})
+				}
+	
+				return visible;
+			}, visibleTags);
+		}
 
-			return visible;
-		}, visibleTags);
+		return visibleTags;
 	}
 
 	@action
