@@ -5,7 +5,7 @@ import TodoItem from './TodoItem';
 import { computed } from 'mobx';
 
 @observer
-export default class TodoOverview extends React.Component {
+class TodoOverview extends React.Component {
 	render() {
 		const {todoStore} = this.props;
 
@@ -55,5 +55,8 @@ export default class TodoOverview extends React.Component {
 
 TodoOverview.propTypes = {
 	viewStore: PropTypes.object.isRequired,
-	todoStore: PropTypes.object.isRequired
+	todoStore: PropTypes.object.isRequired,
+	tagStore: PropTypes.object.isRequired
 }
+
+export default TodoOverview;

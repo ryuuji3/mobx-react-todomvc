@@ -1,5 +1,6 @@
-import React from "react";
-import "./Label.css";
+import React from 'react';
+import './Label.css';
+import PropTypes from 'prop-types';
 
 export default function Label(props) {
     const { text } = props;
@@ -9,3 +10,8 @@ export default function Label(props) {
         {text}
     </div>
 }
+
+Label.propTypes = {
+    text: PropTypes.string.isRequired,
+    classes: PropTypes.string
+};

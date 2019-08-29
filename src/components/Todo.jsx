@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 import TodoEntry from './TodoEntry';
 import TodoOverview from './TodoOverview';
 import TodoFooter from './TodoFooter';
-import { observer } from "mobx-react";
-import TagFooter from "./TagFooter";
+import { observer } from 'mobx-react';
+import TagFooter from './TagFooter';
+import PropTypes from 'prop-types';
 
 @observer
-export default class Todo extends React.Component {
+class Todo extends React.Component {
     render() {
         const { rootStore } = this.props;
         const { todos: todoStore, view: viewStore, tags: tagStore } = rootStore;
@@ -28,3 +29,9 @@ export default class Todo extends React.Component {
         </div>
     }
 }
+
+Todo.propTypes = {
+    rootStore: PropTypes.object.isRequired
+}
+
+export default Todo;

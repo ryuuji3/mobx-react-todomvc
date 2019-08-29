@@ -1,10 +1,11 @@
-import React from "react";
-import { observer } from "mobx-react";
-import TagList from "./TagList";
-import { computed, action } from "mobx";
+import React from 'react';
+import { observer } from 'mobx-react';
+import TagList from './TagList';
+import { computed, action } from 'mobx';
+import PropTypes from 'prop-types';
 
 @observer
-export default class TagFooter extends React.Component {
+class TagFooter extends React.Component {
     render() {
         return <TagList tags={this.props.viewStore.visibleTags} onDismiss={this.removeTag} onClick={this.filterTag} activeTag={this.activeTag} />;
     }
@@ -28,3 +29,10 @@ export default class TagFooter extends React.Component {
         return this.props.viewStore.tagFilter;
     }
 }
+
+TagFooter.propTypes = {
+    viewStore: PropTypes.object.isRequired,
+    tagStore: PropTypes.object.isRequired
+}
+
+export default TagFooter;
