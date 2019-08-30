@@ -1,10 +1,8 @@
 import React from 'react';
 import Button from './ui/Button';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
 import { action } from 'mobx';
 
-@observer
 class Tag extends React.Component {
     render() {
         const { tag, active } = this.props;

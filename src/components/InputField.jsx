@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 
 const ENTER_KEY = 13;
 
-@observer 
 class InputField extends React.Component {
 	render() {
 		const { classes, placeholder, value } = this.props;

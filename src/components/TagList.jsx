@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tag from './Tag';
-import { observer } from 'mobx-react';
 import './TagList.css';
 
-@observer
 class TagList extends React.Component {
     render() {
         const list = this.renderList(this.props);

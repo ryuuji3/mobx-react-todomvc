@@ -1,11 +1,11 @@
 import React from 'react';
 import { observable, action } from 'mobx';
-import { observer } from 'mobx-react';
 import InputField from './InputField';
 import './ui/Button.css';
 import './TagField.css';
 import Button from './ui/Button';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 
 @observer
 class TagField extends React.Component {

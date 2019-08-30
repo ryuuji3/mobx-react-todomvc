@@ -3,7 +3,8 @@ var webpack = require('webpack');
 var NODE_MODULES_PATH = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
-  devtool: 'eval',
+  mode: 'development',
+  devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
     './src/client'
@@ -26,15 +27,21 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      loaders: ['babel-loader'],
-      exclude: NODE_MODULES_PATH,
-    },
-    {
-      test: /\.css$/i,
-      loaders: ['style-loader', 'css-loader'],
-    }
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: NODE_MODULES_PATH,
+        use: [
+          { loader: 'babel-loader' }
+        ]
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
+        ]
+      }
     ]
   }
 };
