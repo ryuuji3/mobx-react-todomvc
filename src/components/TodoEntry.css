@@ -1,3 +1,8 @@
 .TodoEntry > .note-tag-list {
     margin: 5px auto 5px 60px;
 }
+
+.TodoEntry input {
+    color: white;
+    background-color: transparent;
+}
