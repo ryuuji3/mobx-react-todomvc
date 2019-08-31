@@ -1,10 +1,10 @@
 .Button {
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: #333;
     display: inline-block;
     font-size: large;
     padding: 0.25em 1em 0.25em 1em;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 5px;
 }
 
@@ -21,7 +21,7 @@
 .Button.red {
     border-color: red;
     color: red;
-    background-color: white;
+    background-color: rgb(50, 0, 0);
 }
 
 .Button.red.active {
@@ -32,7 +32,7 @@
 
 .Button.orange {
     color: orange;
-    background-color: white;
+    background-color: rgb(25, 25, 0);
     border-color: orange;
 }
 
@@ -44,7 +44,7 @@
 
 .Button.green {
     color: green;
-    background-color: white;
+    background-color: rgb(0, 50, 0);
     border-color: green;
 }
 
@@ -56,7 +56,7 @@
 
 .Button.blue {
     color: blue;
-    background-color: white;
+    background-color: rgb(0, 0, 50);
     border-color: blue;
 }
 
@@ -67,9 +67,9 @@
 }
 
 .Button.violet {
-    color: indigo;
-    background-color: white;
-    border-color: indigo;
+    color: purple;
+    background-color: rgb(25, 0, 25);
+    border-color: purple;
 }
 
 .Button.violet.active {

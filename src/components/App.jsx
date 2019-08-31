@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
 import Todo from './Todo';
+import './App.css';
 
 @observer
 class App extends React.Component {
 	render() {
 		const { rootStore } = this.props;
-		
+
 		return (
 			<div>
 				<div>

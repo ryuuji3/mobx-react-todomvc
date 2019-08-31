@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
-import {action} from 'mobx';
-import {pluralize} from '../utils';
+import { observer } from 'mobx-react';
+import { action } from 'mobx';
+import { pluralize } from '../utils';
 import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
+import "./TodoFooter.css";
 
 @observer
 class TodoFooter extends React.Component {
@@ -24,12 +25,12 @@ class TodoFooter extends React.Component {
 					{this.renderFilterLink(ACTIVE_TODOS, 'active', 'Active')}
 					{this.renderFilterLink(COMPLETED_TODOS, 'completed', 'Completed')}
 				</ul>
-				{ todoStore.completedCount === 0
+				{todoStore.completedCount === 0
 					? null
-					: 	<button
-							className="clear-completed"
-							onClick={this.clearCompleted}>
-							Clear completed
+					: <button
+						className="clear-completed"
+						onClick={this.clearCompleted}>
+						Clear completed
 						</button>
 				}
 			</footer>
@@ -39,7 +40,7 @@ class TodoFooter extends React.Component {
 	renderFilterLink(filterName, url, caption) {
 		return (<li>
 			<a href={'#/' + url}
-				className={filterName ===  this.props.viewStore.todoFilter ? 'selected' : ''}>
+				className={filterName === this.props.viewStore.todoFilter ? 'selected' : ''}>
 				{caption}
 			</a>
 			{' '}

@@ -5,6 +5,7 @@ import TodoFooter from './TodoFooter';
 import { observer } from 'mobx-react';
 import TagFooter from './TagFooter';
 import PropTypes from 'prop-types';
+import './Todo.css';
 
 @observer
 class Todo extends React.Component {

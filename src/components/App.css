@@ -1,0 +1,8 @@
+body {
+    color: white;
+    background-color: rgb(34, 30, 30);
+}
+
+header.header > h1 {
+    color: #fcc;
+}

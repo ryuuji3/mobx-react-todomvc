@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './InputField.css';
 
 const ENTER_KEY = 13;
 
