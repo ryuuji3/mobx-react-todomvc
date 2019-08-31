@@ -16,12 +16,12 @@ class TagField extends React.Component {
         const buttonText = <span>+ New tag</span>
 
         return <div className="TagField">
-            { this.selected ? 
+            {this.selected ?
                 <div className="Tag Button">
                     <InputField placeholder="New tag" value={this.name} onEnter={this.updateTag} onInput={this.updateName} onBlur={this.toggleSelect} />
                 </div>
                 :
-                <Button text={buttonText} classes="grey-outline" onClick={this.toggleSelect} /> 
+                <Button text={buttonText} classes="grey-outline" onClick={this.toggleSelect} />
             }
         </div>
     }
@@ -39,9 +39,11 @@ class TagField extends React.Component {
     @action
     updateTag = name => {
         const tag = this.props.tagStore.addTag(name);
-        
+
         this.props.onSubmit(tag);
         this.toggleSelect();
+
+        this.name = '';
     }
 }
 
